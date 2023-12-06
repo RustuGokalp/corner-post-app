@@ -1,5 +1,5 @@
 <template>
-  <div class="card mr-3 mb-3 card-success" style="width: 18rem">
+  <div class="card mr-3 mb-3 card-success cardWrapper">
     <div class="card-body">
       <h5 class="card-title">Card title</h5>
       <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -13,3 +13,9 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.cardWrapper {
+  width: 18rem;
+}
+</style>
