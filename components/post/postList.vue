@@ -2,13 +2,20 @@
   <div
     class="container-fluid mt-5 d-flex flex-wrap justify-content-center align-items-center"
   >
-    <Post v-for="index in 10" />
+    <Post v-for="index in 10" :isAdmin="isAdmin" />
   </div>
 </template>
 
 <script>
 import Post from "~/components/post/post";
 export default {
+  props: {
+    isAdmin: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
   components: {
     Post,
   },

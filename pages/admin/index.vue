@@ -5,7 +5,7 @@
         Yeni Bir Yazı Ekle
       </button>
     </div>
-    <PostList />
+    <PostList :isAdmin="true" />
   </div>
 </template>
 
