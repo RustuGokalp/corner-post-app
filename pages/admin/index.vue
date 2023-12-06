@@ -2,7 +2,7 @@
   <div>
     <div class="container d-flex justify-content-center align-items-center">
       <button class="btn btn-dark" @click="$router.push('/admin/new-post')">
-        Yeni Bir Yazı Ekle
+        Yeni Bir Yazı Ekleeeeeeee
       </button>
     </div>
     <PostList :isAdmin="true" />
