@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PostList />
+    <PostList :posts="fetchedPosts" />
     <About />
   </div>
 </template>
@@ -12,6 +12,28 @@ export default {
   components: {
     PostList,
     About,
+  },
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        fetchedPosts: [
+          {
+            id: 1,
+            title: "Trial Title",
+            subtitle: "Trial Subtitle",
+            text: "Trial Main Text",
+            author: "Rüştü Gökalp Beğen",
+          },
+          {
+            id: 2,
+            title: "Trial Title",
+            subtitle: "Trial Subtitle",
+            text: "Trial Main Text",
+            author: "Rüştü Gökalp Beğen",
+          },
+        ],
+      });
+    }, 1000);
   },
 };
 </script>

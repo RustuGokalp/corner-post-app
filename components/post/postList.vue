@@ -2,7 +2,12 @@
   <div
     class="container-fluid mt-5 d-flex flex-wrap justify-content-center align-items-center"
   >
-    <Post v-for="index in 10" :isAdmin="isAdmin" />
+    <Post
+      :post="post"
+      v-for="post in posts"
+      :isAdmin="isAdmin"
+      :key="post.id"
+    />
   </div>
 </template>
 
@@ -14,6 +19,10 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    posts: {
+      type: Array,
+      required: true,
     },
   },
   components: {
