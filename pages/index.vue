@@ -13,6 +13,9 @@ export default {
     PostList,
     About,
   },
+  created() {
+    this.$store.dispatch("setPosts", this.fetchedPosts);
+  },
   asyncData(context) {
     return new Promise((resolve, reject) => {
       resolve({
