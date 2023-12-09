@@ -13,9 +13,9 @@ export default {
     PostList,
     About,
   },
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
+  asyncData(context) {
+    return new Promise((resolve, reject) => {
+      resolve({
         fetchedPosts: [
           {
             id: 1,
@@ -33,7 +33,14 @@ export default {
           },
         ],
       });
-    }, 1000);
+      reject(new Error());
+    })
+      .then((data) => {
+        return data;
+      })
+      .catch((e) => {
+        context.error(e);
+      });
   },
 };
 </script>
