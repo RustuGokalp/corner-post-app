@@ -14,36 +14,36 @@ export default {
     About,
   },
   created() {
-    this.$store.dispatch("setPosts", this.fetchedPosts);
+    // this.$store.dispatch("setPosts", this.fetchedPosts);
   },
-  asyncData(context) {
+  computed: {
+    fetchedPosts() {
+      return this.$store.getters.getPosts;
+    },
+  },
+  fetch(context) {
     return new Promise((resolve, reject) => {
-      resolve({
-        fetchedPosts: [
-          {
-            id: 1,
-            title: "Trial Title",
-            subtitle: "Trial Subtitle",
-            text: "Trial Main Text",
-            author: "Rüştü Gökalp Beğen",
-          },
-          {
-            id: 2,
-            title: "Trial Title",
-            subtitle: "Trial Subtitle",
-            text: "Trial Main Text",
-            author: "Rüştü Gökalp Beğen",
-          },
-        ],
-      });
+      context.store.dispatch("setPosts", [
+        {
+          id: 1,
+          title: "Trial Title",
+          subtitle: "Trial Subtitle",
+          text: "Trial Main Text",
+          author: "Rüştü Gökalp Beğen",
+        },
+        {
+          id: 2,
+          title: "Trial Title",
+          subtitle: "Trial Subtitle",
+          text: "Trial Main Text",
+          author: "Rüştü Gökalp Beğen",
+        },
+      ]);
+      resolve();
       reject(new Error());
-    })
-      .then((data) => {
-        return data;
-      })
-      .catch((e) => {
-        context.error(e);
-      });
+    }).catch((e) => {
+      context.error(e);
+    });
   },
 };
 </script>
