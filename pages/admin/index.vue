@@ -5,7 +5,7 @@
         Yeni Bir Yazı Ekle
       </button>
     </div>
-    <PostList :isAdmin="true" />
+    <PostList :isAdmin="true" :posts="fetchedPosts" />
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
   layout: "admin",
   components: {
     PostList,
+  },
+  computed: {
+    fetchedPosts() {
+      return this.$store.getters.getPosts;
+    },
   },
 };
 </script>
