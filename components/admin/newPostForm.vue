@@ -69,11 +69,27 @@ export default {
       required: false,
       default: false,
     },
+    post: {
+      type: Object,
+      required: false,
+    },
   },
+
   methods: {
     onSubmit() {
       this.$emit("submit", this.post);
     },
+  },
+  created() {
+    this.post = this.post
+      ? this.post
+      : {
+          id: null,
+          title: null,
+          subtitle: null,
+          author: null,
+          text: null,
+        };
   },
 };
 </script>
