@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import newPostForm from "~/components/admin/newPostForm";
 export default {
   components: {
@@ -10,7 +11,14 @@ export default {
   },
   methods: {
     savePost(post) {
-      console.log(post);
+      axios
+        .post(
+          "https://my-corner-post-app-default-rtdb.firebaseio.com/posts.json",
+          post
+        )
+        .then((res) => {
+          console.log(res);
+        });
     },
   },
 };
