@@ -1,4 +1,5 @@
 import Vuex from "vuex";
+import axios from "axios";
 
 const createStore = () => {
   return new Vuex.Store({
@@ -12,22 +13,18 @@ const createStore = () => {
     },
     actions: {
       nuxtServerInit(vuexContext) {
-        vuexContext.commit("setPosts", [
-          {
-            id: 1,
-            title: "Trial Title",
-            subtitle: "Trial Subtitle",
-            text: "Trial Main Text",
-            author: "Rüştü Gökalp Beğen",
-          },
-          {
-            id: 2,
-            title: "Trial Title",
-            subtitle: "Trial Subtitle",
-            text: "Trial Main Text",
-            author: "Rüştü Gökalp Beğen",
-          },
-        ]);
+        return axios
+          .get(
+            "https://my-corner-post-app-default-rtdb.firebaseio.com/posts.json"
+          )
+          .then((response) => {
+            let data = response.data;
+            let postArray = [];
+            for (let key in data) {
+              postArray.push({ id: key, ...data[key] });
+            }
+            vuexContext.commit("setPosts", postArray);
+          });
       },
       setPosts(vuexContext, posts) {
         vuexContext.commit("setPosts", posts);
