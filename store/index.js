@@ -10,6 +10,9 @@ const createStore = () => {
       setPosts(state, posts) {
         state.fetchedPosts = posts;
       },
+      addPost(state, post) {
+        state.fetchedPosts.push(post);
+      },
     },
     actions: {
       nuxtServerInit(vuexContext) {
@@ -28,6 +31,17 @@ const createStore = () => {
       },
       setPosts(vuexContext, posts) {
         vuexContext.commit("setPosts", posts);
+      },
+      addPost(vuexContext, post) {
+        axios
+          .post(
+            "https://my-corner-post-app-default-rtdb.firebaseio.com/posts.json",
+            post
+          )
+          .then((response) => {
+            vuexContext.commit("addPost", { ...post, id: response.data.name });
+            this.$router.push("/admin");
+          });
       },
     },
     getters: {

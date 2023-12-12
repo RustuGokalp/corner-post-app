@@ -11,14 +11,7 @@ export default {
   },
   methods: {
     savePost(post) {
-      axios
-        .post(
-          "https://my-corner-post-app-default-rtdb.firebaseio.com/posts.json",
-          post
-        )
-        .then((res) => {
-          console.log(res);
-        });
+      this.$store.dispatch("addPost", post);
     },
   },
 };
