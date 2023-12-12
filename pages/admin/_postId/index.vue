@@ -24,15 +24,10 @@ export default {
   },
   methods: {
     updatePost(editedPost) {
-      axios
-        .put(
-          `https://my-corner-post-app-default-rtdb.firebaseio.com/posts/${this.$route.params.postId}.json`,
-          editedPost
-        )
-        .then((response) => {
-          this.$router.push("/admin");
-        })
-        .catch((e) => console.log(e));
+      this.$store.dispatch("updatePost", {
+        ...editedPost,
+        id: this.$route.params.postId,
+      });
     },
   },
 };

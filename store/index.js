@@ -13,6 +13,14 @@ const createStore = () => {
       addPost(state, post) {
         state.fetchedPosts.push(post);
       },
+      updatePost(state, editedPost) {
+        let postIndex = state.fetchedPosts.findIndex(
+          (post) => post.id == editedPost.id
+        );
+        if (postIndex) {
+          state.fetchedPosts[postIndex] = editedPost;
+        }
+      },
     },
     actions: {
       nuxtServerInit(vuexContext) {
@@ -42,6 +50,18 @@ const createStore = () => {
             vuexContext.commit("addPost", { ...post, id: response.data.name });
             this.$router.push("/admin");
           });
+      },
+      updatePost(vuexContext, editedPost) {
+        axios
+          .put(
+            `https://my-corner-post-app-default-rtdb.firebaseio.com/posts/${editedPost.id}.json`,
+            editedPost
+          )
+          .then((response) => {
+            vuexContext.commit("updatePost", editedPost);
+            this.$router.push("/admin");
+          })
+          .catch((e) => console.log(e));
       },
     },
     getters: {
