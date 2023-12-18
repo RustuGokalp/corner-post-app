@@ -13,7 +13,9 @@
           class="btn btn-outline-warning btn-sm"
           >Düzenle</a
         >
-        <a @click.prevent="deletePost()" class="btn btn-outline-danger btn-sm"
+        <a
+          @click.prevent="deletePost(post.id)"
+          class="btn btn-outline-danger btn-sm"
           >Sil</a
         >
       </div>
@@ -45,20 +47,8 @@ export default {
   },
 
   methods: {
-    async deletePost(context) {
-      try {
-        const apiUrl = `https://my-corner-post-app-default-rtdb.firebaseio.com/posts/${this.post.id}.json`;
-        const response = await axios.delete(apiUrl);
-
-        this.deleteResult = {
-          success: true,
-        };
-      } catch (error) {
-        this.deleteResult = {
-          success: false,
-          error: "Silme işlemi sırasında bir hata oluştu.",
-        };
-      }
+    deletePost(postId) {
+      this.$store.dispatch("deletePost", postId);
     },
   },
 };

@@ -21,6 +21,11 @@ const createStore = () => {
           state.fetchedPosts[postIndex] = editedPost;
         }
       },
+      deletePost(state, postId) {
+        state.fetchedPosts = state.fetchedPosts.filter(
+          (post) => post.id !== postId
+        );
+      },
     },
     actions: {
       nuxtServerInit(vuexContext) {
@@ -62,6 +67,16 @@ const createStore = () => {
             this.$router.push("/admin");
           })
           .catch((e) => console.log(e));
+      },
+      async deletePost({ commit }, postId) {
+        try {
+          const apiUrl = `https://my-corner-post-app-default-rtdb.firebaseio.com/posts/${postId}.json`;
+          const response = await axios.delete(apiUrl);
+
+          commit("deletePost", postId);
+        } catch (error) {
+          console.error("Silme işlemi sırasında bir hata oluştu.", error);
+        }
       },
     },
     getters: {
