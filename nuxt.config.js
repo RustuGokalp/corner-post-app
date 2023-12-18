@@ -15,7 +15,12 @@ export default {
   },
   loading: { color: "#555555" },
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["~assets/style/bootstrap.min.css"],
+  css: ["~assets/style/bootstrap.min.css", "~assets/style/transition.css"],
+
+  transition: {
+    name: "layout",
+    mode: "out-in",
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
