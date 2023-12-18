@@ -13,7 +13,9 @@
           class="btn btn-outline-warning btn-sm"
           >Düzenle</a
         >
-        <a href="#" class="btn btn-outline-danger btn-sm">Sil</a>
+        <a @click.prevent="deletePost()" class="btn btn-outline-danger btn-sm"
+          >Sil</a
+        >
       </div>
       <a
         href="#"
@@ -27,6 +29,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: {
     isAdmin: {
@@ -37,6 +41,24 @@ export default {
     post: {
       type: Object,
       required: true,
+    },
+  },
+
+  methods: {
+    async deletePost(context) {
+      try {
+        const apiUrl = `https://my-corner-post-app-default-rtdb.firebaseio.com/posts/${this.post.id}.json`;
+        const response = await axios.delete(apiUrl);
+
+        this.deleteResult = {
+          success: true,
+        };
+      } catch (error) {
+        this.deleteResult = {
+          success: false,
+          error: "Silme işlemi sırasında bir hata oluştu.",
+        };
+      }
     },
   },
 };
