@@ -7,6 +7,9 @@
 <script>
 import PostList from "~/components/post/postList";
 export default {
+  head: {
+    title: "Yazılar | Köşe Yazısı",
+  },
   components: {
     PostList,
   },
