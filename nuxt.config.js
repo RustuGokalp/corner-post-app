@@ -15,7 +15,11 @@ export default {
   },
   loading: { color: "#555555" },
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["~assets/style/bootstrap.min.css", "~assets/style/transition.css"],
+  css: [
+    "~assets/style/bootstrap.min.css",
+    "~assets/style/transition.css",
+    "bootstrap/dist/css/bootstrap.css",
+  ],
 
   transition: {
     name: "layout",
